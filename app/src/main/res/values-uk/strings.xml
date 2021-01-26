@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">УніГрупа</string>
+    <string name="back">Назад</string>
+    <string name="ok">Гаразд</string>
+    <string name="cancel">Відмінити</string>
+    <string name="name_hint">Введіть ім\'я</string>
+    <string name="email_hint">Введіть е-пошту</string>
+    <string name="password_hint">Введіть пароль</string>
+    <string name="password_confirm_hint">Підтвердіть пароль</string>
+    <string name="btn_register">Зареєструватися</string>
+    <string name="btn_log_in">Увійти</string>
+    <string name="exit_account">Вийти з аккаунту</string>
+    <string name="delete_account">Видалити аккаунт</string>
+    <string name="profile_info">Інформація про профіль</string>
+    <string name="title_tip">Підказка</string>
+    <string name="tip">Для входу вам не обов\'язково вводити ім\'я та підтвердження паролю.</string>
+    <string name="btn_group_list">Список групи</string>
+    <string name="profile_name">Ім\'я профілю:</string>
+    <string name="profile_email">Е-пошта профілю:</string>
+    <string name="std_list_id">Номер:</string>
+    <string name="std_birthday">День народження:</string>
+    <string name="std_email">Е-пошта:</string>
+    <string name="std_phone">Телефон:</string>
+    <string name="add_student">Додати студента</string>
+    <string name="hint_lastname">Прізвище</string>
+    <string name="hint_name">Ім\'я</string>
+    <string name="hint_surname">По батькові</string>
+    <string name="hint_list_id">Номер</string>
+    <string name="hint_email">Е-пошта</string>
+    <string name="hint_phone">Телефон</string>
+    <string name="hint_birthday">День народження</string>
+    <string name="student_send_email">Надіслати Лист</string>
+    <string name="student_send_sms">Надіслати СМС</string>
+    <string name="student_delete">Видалити</string>
+    <string name="student_edit">Редагувати</string>
+    <string name="delete_all">Видалити всіх</string>
+    <string name="apply_changes">Підтвердити зміни</string>
+    <string name="hint_name_changes">Введіть нове ім\'я</string>
+    <string name="hint_new_lastname">Введіть нове прізвище</string>
+    <string name="hint_new_name">Введіть нове ім\'я</string>
+    <string name="hint_new_surname">Введіть нове побатькові</string>
+    <string name="hint_new_id">Введіть новий номер</string>
+    <string name="hint_new_email">Введіть нову е-почту</string>
+    <string name="hint_new_phone">Введіть новий телефон</string>
+    <string name="hint_new_birthday">Введіть новий день народження</string>
+</resources>

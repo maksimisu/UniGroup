@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "408529774310",
+    "project_id": "unigroup-ad597",
+    "storage_bucket": "unigroup-ad597.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:408529774310:android:a910b8fb20aee36b83fd27",
+        "android_client_info": {
+          "package_name": "com.blackbird.unigroup"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "408529774310-sfaql4qtkllmo5lkjfbc0blm2si1qd0c.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBVyThLG7B8eZ7BGin3IWeiTa54hmLsHss"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "408529774310-sfaql4qtkllmo5lkjfbc0blm2si1qd0c.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

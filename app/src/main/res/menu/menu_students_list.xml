@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/actionBack"
+        android:icon="@drawable/ic_back"
+        android:title="@string/back"
+        app:showAsAction="always" />
+
+    <item
+        android:id="@+id/actionDeleteAll"
+        android:title="@string/delete_all"
+        app:showAsAction="never" />
+
+    <item
+        android:id="@+id/actionProfileInfo"
+        android:title="@string/profile_info"
+        app:showAsAction="never" />
+
+</menu>
