@@ -19,6 +19,7 @@ class StudentActivity : AppCompatActivity() {
     private lateinit var dbReference: DatabaseReference
     lateinit var auth: FirebaseAuth
     lateinit var email: String
+    lateinit var student: Student
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -27,21 +28,30 @@ class StudentActivity : AppCompatActivity() {
         auth = FirebaseAuth.getInstance()
         dbReference = FirebaseDatabase.getInstance().reference
 
-        val listId = intent.getIntExtra("EXTRA_ID", 0)
+        var extraListId = intent.getIntExtra("EXTRA_ID", 0)
 
 
         val profileListener = object : ValueEventListener {
             override fun onDataChange(dataSnapshot: DataSnapshot) {
-                val student = dataSnapshot.child("users/${auth.uid}/group/id_student_${auth.uid}_$listId").getValue(
+                val studentData = dataSnapshot.child("users/${auth.uid}/group/id_student_${auth.uid}_$extraListId").getValue(
                     Student::class.java)
-                tvStudentLastname.text = student?.lastname
-                tvStudentName.text = student?.name
-                tvStudentSurname.text = student?.surname
-                tvStudentListId.text = student?.listId.toString()
-                tvStudentEmail.text = student?.email
-                tvStudentPhone.text = student?.phoneNumber
-                tvStudentBirthday.text = student?.birthday
-                email = student?.email.toString()
+                tvStudentLastname.text = studentData?.lastname
+                tvStudentName.text = studentData?.name
+                tvStudentSurname.text = studentData?.surname
+                tvStudentListId.text = studentData?.listId.toString()
+                tvStudentEmail.text = studentData?.email
+                tvStudentPhone.text = studentData?.phoneNumber
+                tvStudentBirthday.text = studentData?.birthday
+                email = studentData?.email.toString()
+                student = Student(
+                        studentData?.lastname.toString(),
+                        studentData?.name.toString(),
+                        studentData?.surname.toString(),
+                        studentData?.listId.toString().toInt(),
+                        studentData?.email.toString(),
+                        studentData?.phoneNumber.toString(),
+                        studentData?.birthday.toString()
+                )
             }
 
             override fun onCancelled(databaseError: DatabaseError) {
@@ -51,7 +61,7 @@ class StudentActivity : AppCompatActivity() {
         dbReference.addValueEventListener(profileListener)
 
         btnDeleteStudent.setOnClickListener {
-            dbReference.child("users/${auth.uid}/group/id_student_${auth.uid}_$listId").removeValue()
+            dbReference.child("users/${auth.uid}/group/id_student_${auth.uid}_$extraListId").removeValue()
             finish()
         }
 
@@ -61,9 +71,17 @@ class StudentActivity : AppCompatActivity() {
 
         btnEditStudent.setOnClickListener {
             val intent = Intent(this, EditStudentActivity::class.java).also {
-                it.putExtra("EXTRA_ID", listId)
+                it.putExtra("EXTRA_ID", extraListId)
                 startActivity(it)
             }
+        }
+
+        btnMigrateStudent.setOnClickListener {
+            val newId = etNewStudentId.text.toString().toInt()
+            student.listId = newId
+            dbReference.child("users/${auth.uid}/group/id_student_${auth.uid}_${newId}").setValue(student)
+            dbReference.child("users/${auth.uid}/group/id_student_${auth.uid}_$extraListId").removeValue()
+            extraListId = newId
         }
     }
 

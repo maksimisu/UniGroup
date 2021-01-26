@@ -4,8 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:scrollbars="vertical"
     android:padding="@dimen/layout_padding"
+    android:scrollbars="vertical"
     tools:context=".activities.StudentActivity">
 
     <TextView
@@ -109,7 +109,7 @@
         android:layout_width="135dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
-        android:text="@string/student_send_email"
+        android:text="@string/btn_student_send_email"
         app:layout_constraintEnd_toStartOf="@+id/btnSendSMS"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
@@ -119,7 +119,7 @@
         android:id="@+id/btnSendSMS"
         android:layout_width="135dp"
         android:layout_height="wrap_content"
-        android:text="@string/student_send_sms"
+        android:text="@string/btn_student_send_sms"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toEndOf="@+id/btnSendEmail"
@@ -130,7 +130,7 @@
         android:layout_width="135dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
-        android:text="@string/student_edit"
+        android:text="@string/btn_student_edit"
         app:layout_constraintEnd_toStartOf="@+id/btnDeleteStudent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
@@ -140,10 +140,34 @@
         android:id="@+id/btnDeleteStudent"
         android:layout_width="135dp"
         android:layout_height="wrap_content"
-        android:text="@string/student_delete"
+        android:text="@string/btn_student_delete"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toEndOf="@+id/btnEditStudent"
         app:layout_constraintTop_toTopOf="@+id/btnEditStudent" />
+
+    <Button
+        android:id="@+id/btnMigrateStudent"
+        android:layout_width="135dp"
+        android:layout_height="wrap_content"
+        android:text="@string/btn_student_migrate"
+        app:layout_constraintBottom_toBottomOf="@+id/etNewStudentId"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/etNewStudentId"
+        app:layout_constraintTop_toTopOf="@+id/etNewStudentId" />
+
+    <EditText
+        android:id="@+id/etNewStudentId"
+        android:layout_width="135dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:ems="10"
+        android:hint="@string/hint_new_id"
+        android:inputType="number"
+        app:layout_constraintEnd_toStartOf="@+id/btnMigrateStudent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/btnEditStudent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

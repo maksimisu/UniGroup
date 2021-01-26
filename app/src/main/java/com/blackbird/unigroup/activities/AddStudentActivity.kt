@@ -24,9 +24,15 @@ class AddStudentActivity : AppCompatActivity() {
         btnAddStudentData.setOnClickListener {
             dbReference = FirebaseDatabase.getInstance().reference
             auth = FirebaseAuth.getInstance()
-            val student = Student(etStudentLastname.text.toString(), etStudentName.text.toString(),
-                etStudentSurname.text.toString(), etStudentListId.text.toString().toInt(),
-                etStudentEmail.text.toString(), etStudentPhone.text.toString(), etStudentBirthday.text.toString())
+            val student = Student(
+                    etStudentLastname.text.toString(),
+                    etStudentName.text.toString(),
+                    etStudentSurname.text.toString(),
+                    etStudentListId.text.toString().toInt(),
+                    etStudentEmail.text.toString(),
+                    etStudentPhone.text.toString(),
+                    etStudentBirthday.text.toString()
+            )
             dbReference.child("users").child(auth.uid!!).child("group").child("id_student_${auth.uid}_${etStudentListId.text}").setValue(student)
             finish()
         }

@@ -2,6 +2,9 @@ package com.blackbird.unigroup.activities
 
 import android.os.Bundle
 import android.util.Log
+import android.view.Menu
+import android.view.MenuInflater
+import android.view.MenuItem
 import androidx.appcompat.app.AppCompatActivity
 import com.blackbird.unigroup.R
 import com.blackbird.unigroup.data.Student
@@ -52,6 +55,22 @@ class EditStudentActivity : AppCompatActivity() {
             dbReference.child("$path/phoneNumber").setValue(etNewPhone.text.toString())
             dbReference.child("$path/birthday").setValue(etNewBirthday.text.toString())
             finish()
+        }
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+        val inflater: MenuInflater = menuInflater
+        inflater.inflate(R.menu.menu_student, menu)
+        return true
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        return when(item.itemId) {
+            R.id.actionBack -> {
+                finish()
+                true
+            }
+            else -> super.onOptionsItemSelected(item)
         }
     }
 }

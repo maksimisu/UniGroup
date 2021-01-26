@@ -30,10 +30,10 @@
     <string name="hint_email">Е-пошта</string>
     <string name="hint_phone">Телефон</string>
     <string name="hint_birthday">День народження</string>
-    <string name="student_send_email">Надіслати Лист</string>
-    <string name="student_send_sms">Надіслати СМС</string>
-    <string name="student_delete">Видалити</string>
-    <string name="student_edit">Редагувати</string>
+    <string name="btn_student_send_email">Надіслати Лист</string>
+    <string name="btn_student_send_sms">Надіслати СМС</string>
+    <string name="btn_student_delete">Видалити</string>
+    <string name="btn_student_edit">Редагувати</string>
     <string name="delete_all">Видалити всіх</string>
     <string name="apply_changes">Підтвердити зміни</string>
     <string name="hint_name_changes">Введіть нове ім\'я</string>
@@ -44,4 +44,5 @@
     <string name="hint_new_email">Введіть нову е-почту</string>
     <string name="hint_new_phone">Введіть новий телефон</string>
     <string name="hint_new_birthday">Введіть новий день народження</string>
+    <string name="btn_student_migrate">Мігрувати</string>
 </resources>
