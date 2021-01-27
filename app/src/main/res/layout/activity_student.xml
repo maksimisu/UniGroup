@@ -119,6 +119,7 @@
         android:id="@+id/btnSendSMS"
         android:layout_width="135dp"
         android:layout_height="wrap_content"
+        android:enabled="false"
         android:text="@string/btn_student_send_sms"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"

@@ -22,10 +22,11 @@
     <string name="tip">For log in you don\'t have to complete name and password confirmation fields.</string>
     <string name="delete_all">Delete all</string>
 
-    <!-- Main Fragment -->
+    <!-- Main Activity -->
     <string name="btn_group_list">Group list</string>
+    <string name="btn_send_all">Send email all</string>
 
-    <!-- Profile fragment -->
+    <!-- Profile Activity -->
     <string name="profile_name">Profile name:</string>
     <string name="profile_email">Profile Email:</string>
 

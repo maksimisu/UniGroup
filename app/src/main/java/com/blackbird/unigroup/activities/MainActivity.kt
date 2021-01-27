@@ -1,7 +1,9 @@
 package com.blackbird.unigroup.activities
 
 import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
+import android.util.Log
 import android.view.Menu
 import android.view.MenuInflater
 import android.view.MenuItem
@@ -9,10 +11,10 @@ import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import com.blackbird.unigroup.R
+import com.blackbird.unigroup.data.Student
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
-import com.google.firebase.database.DatabaseReference
-import com.google.firebase.database.FirebaseDatabase
+import com.google.firebase.database.*
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlin.system.exitProcess
 
@@ -21,18 +23,40 @@ class MainActivity : AppCompatActivity() {
     lateinit var auth: FirebaseAuth
     private lateinit var currentUser: FirebaseUser
     private lateinit var dbReference: DatabaseReference
+    private var studentsList = mutableListOf<Student>()
+    private var emailsList = ""
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         auth = FirebaseAuth.getInstance()
         currentUser = auth.currentUser!!
-        dbReference = FirebaseDatabase.getInstance().reference
+        dbReference = FirebaseDatabase.getInstance().reference.child("users/${auth.uid}/group")
+
+        val profileListener = object : ValueEventListener {
+            override fun onDataChange(dataSnapshot: DataSnapshot) {
+                studentsList.clear()
+                for(i: DataSnapshot in dataSnapshot.children) {
+                    val data = i.getValue(Student::class.java)
+                    studentsList.add(data!!)
+                }
+                updateEmailsList()
+            }
+
+            override fun onCancelled(databaseError: DatabaseError) {
+                Log.w("TAG", "Failed to read value.", databaseError.toException())
+            }
+        }
+        dbReference.addValueEventListener(profileListener)
 
         btnGroupList.setOnClickListener {
             val intent = Intent(this, StudentsListActivity::class.java).also {
                 startActivity(it)
             }
+        }
+
+        btnSendEmailAll.setOnClickListener {
+            sendEmailAll()
         }
     }
 
@@ -86,6 +110,29 @@ class MainActivity : AppCompatActivity() {
                 .setNegativeButton("No") { _, _ ->
                 }
         builder.create().show()
+    }
+
+    private fun sendEmailAll() {
+        val intent = Intent(Intent.ACTION_SENDTO).apply {
+            data = Uri.parse("mailto:")
+            putExtra(Intent.EXTRA_EMAIL, arrayOf(emailsList))
+            putExtra(Intent.EXTRA_SUBJECT, "Headstudent")
+        }
+        if (intent.resolveActivity(packageManager) != null) {
+            try {
+                startActivity(Intent.createChooser(intent, "Choose Email Client..."))
+            }
+            catch (e: Exception){
+                Toast.makeText(this, e.message, Toast.LENGTH_LONG).show()
+            }
+        }
+    }
+
+    private fun updateEmailsList() {
+        emailsList = ""
+        for(i in 0 until studentsList.size) {
+            emailsList += "${studentsList[i].email.toString()},"
+        }
     }
 
 }
