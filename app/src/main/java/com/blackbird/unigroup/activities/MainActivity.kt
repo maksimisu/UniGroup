@@ -14,6 +14,7 @@ import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.FirebaseDatabase
 import kotlinx.android.synthetic.main.activity_main.*
+import kotlin.system.exitProcess
 
 class MainActivity : AppCompatActivity() {
 
@@ -49,7 +50,9 @@ class MainActivity : AppCompatActivity() {
                 true
             }
             R.id.actionBack -> {
-                onBackPressed()
+                moveTaskToBack(true)
+                android.os.Process.killProcess(android.os.Process.myPid())
+                exitProcess(1)
                 true
             }
             R.id.actionDeleteAccount -> {
