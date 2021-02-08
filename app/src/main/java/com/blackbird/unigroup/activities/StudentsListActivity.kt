@@ -42,6 +42,7 @@ class StudentsListActivity : AppCompatActivity() {
                     val data = i.getValue(Student::class.java)
                     studentsList.add(data!!)
                 }
+                studentsList.sortBy { it.listId }
                 adapter.notifyDataSetChanged()
             }
 

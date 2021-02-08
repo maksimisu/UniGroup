@@ -3,6 +3,7 @@ package com.blackbird.unigroup.activities
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
+import android.telephony.SmsManager
 import android.util.Log
 import android.view.Menu
 import android.view.MenuInflater
@@ -67,6 +68,15 @@ class StudentActivity : AppCompatActivity() {
 
         btnSendEmail.setOnClickListener {
             composeEmail(email)
+        }
+
+        btnSendSMS.setOnClickListener {
+            val intent = Intent(Intent.ACTION_VIEW).also {
+                it.data = Uri.parse("smsto:")
+                it.putExtra("address", student.phoneNumber)
+                it.type = "vnd.android-dir/mms-sms"
+                startActivity(it)
+            }
         }
 
         btnEditStudent.setOnClickListener {
