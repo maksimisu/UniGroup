@@ -35,12 +35,12 @@
     <string name="btn_student_delete">Видалити</string>
     <string name="btn_student_edit">Редагувати</string>
     <string name="delete_all">Видалити всіх</string>
-    <string name="apply_changes">Підтвердити зміни</string>
+    <string name="apply_changes">Підтвердити</string>
     <string name="hint_name_changes">Введіть нове ім\'я</string>
     <string name="hint_new_lastname">Введіть нове прізвище</string>
     <string name="hint_new_name">Введіть нове ім\'я</string>
     <string name="hint_new_surname">Введіть нове побатькові</string>
-    <string name="hint_new_id">Введіть новий номер</string>
+    <string name="hint_new_id">Новий номер</string>
     <string name="hint_new_email">Введіть нову е-почту</string>
     <string name="hint_new_phone">Введіть новий телефон</string>
     <string name="hint_new_birthday">Введіть новий день народження</string>

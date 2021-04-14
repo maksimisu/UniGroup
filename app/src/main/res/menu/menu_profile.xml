@@ -6,7 +6,7 @@
         android:id="@+id/actionExitAccount"
         android:icon="@drawable/ic_exit_account"
         android:title="@string/exit_account"
-        app:showAsAction="always" />
+        app:showAsAction="ifRoom" />
 
     <item
         android:id="@+id/actionBack"

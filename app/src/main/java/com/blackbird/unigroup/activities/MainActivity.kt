@@ -20,7 +20,7 @@ import kotlin.system.exitProcess
 
 class MainActivity : AppCompatActivity() {
 
-    lateinit var auth: FirebaseAuth
+    private lateinit var auth: FirebaseAuth
     private lateinit var currentUser: FirebaseUser
     private lateinit var dbReference: DatabaseReference
     private var studentsList = mutableListOf<Student>()
@@ -70,6 +70,9 @@ class MainActivity : AppCompatActivity() {
         return when(item.itemId) {
             R.id.actionExitAccount -> {
                 auth.signOut()
+                val intent = Intent(this, LoginActivity::class.java).also {
+                    startActivity(it)
+                }
                 finish()
                 true
             }

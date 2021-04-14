@@ -4,7 +4,7 @@
     <string name="back">Back</string>
     <string name="ok">OK</string>
     <string name="cancel">Cancel</string>
-    <string name="apply_changes">Apply changes</string>
+    <string name="apply_changes">Apply</string>
 
     <!-- Login -->
     <string name="name_hint">Enter name</string>
@@ -58,7 +58,7 @@
     <string name="hint_new_lastname">Enter new lastname</string>
     <string name="hint_new_name">Enter new name</string>
     <string name="hint_new_surname">Enter new surname</string>
-    <string name="hint_new_id">Enter new list id</string>
+    <string name="hint_new_id">New list id</string>
     <string name="hint_new_email">Enter new email</string>
     <string name="hint_new_phone">Enter new phone</string>
     <string name="hint_new_birthday">Enter new birthday</string>
