@@ -50,7 +50,7 @@ class MainActivity : AppCompatActivity() {
         dbReference.addValueEventListener(profileListener)
 
         btnGroupList.setOnClickListener {
-            val intent = Intent(this, StudentsListActivity::class.java).also {
+            Intent(this, StudentsListActivity::class.java).also {
                 startActivity(it)
             }
         }
@@ -70,7 +70,7 @@ class MainActivity : AppCompatActivity() {
         return when(item.itemId) {
             R.id.actionExitAccount -> {
                 auth.signOut()
-                val intent = Intent(this, LoginActivity::class.java).also {
+                Intent(this, LoginActivity::class.java).also {
                     startActivity(it)
                 }
                 finish()
@@ -80,14 +80,13 @@ class MainActivity : AppCompatActivity() {
                 moveTaskToBack(true)
                 android.os.Process.killProcess(android.os.Process.myPid())
                 exitProcess(1)
-                true
             }
             R.id.actionDeleteAccount -> {
                 deleteUser()
                 true
             }
             R.id.actionProfileInfo -> {
-                val intent = Intent(this, ProfileActivity::class.java).also {
+                Intent(this, ProfileActivity::class.java).also {
                     startActivity(it)
                 }
                 true

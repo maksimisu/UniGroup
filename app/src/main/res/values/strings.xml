@@ -25,6 +25,7 @@
     <!-- Main Activity -->
     <string name="btn_group_list">Group list</string>
     <string name="btn_send_all">Send email all</string>
+    <string name="tv_copyrights">© maksimisu</string>
 
     <!-- Profile Activity -->
     <string name="profile_name">Profile name:</string>
