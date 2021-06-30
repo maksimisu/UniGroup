@@ -15,7 +15,7 @@ import kotlinx.android.synthetic.main.activity_add_student.*
 class AddStudentActivity : AppCompatActivity() {
 
     private lateinit var dbReference: DatabaseReference
-    lateinit var auth: FirebaseAuth
+    private lateinit var auth: FirebaseAuth
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

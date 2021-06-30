@@ -21,6 +21,11 @@
     <string name="title_tip">Tip</string>
     <string name="tip">For log in you don\'t have to complete name and password confirmation fields.</string>
     <string name="delete_all">Delete all</string>
+    <string name="sort_by">Sort by…</string>
+    <string name="sort_by_lastname">lastname</string>
+    <string name="sort_by_name">name</string>
+    <string name="sort_by_surname">surname</string>
+    <string name="sort_clear">Clear sort</string>
 
     <!-- Main Activity -->
     <string name="btn_group_list">Group list</string>

@@ -16,7 +16,7 @@ import kotlinx.android.synthetic.main.activity_profile.*
 
 class ProfileActivity : AppCompatActivity() {
 
-    lateinit var auth: FirebaseAuth
+    private lateinit var auth: FirebaseAuth
     private lateinit var currentUser: FirebaseUser
     private lateinit var dbReference: DatabaseReference
 
@@ -29,7 +29,7 @@ class ProfileActivity : AppCompatActivity() {
         val profileEmail = tvProfileEmail
         auth = FirebaseAuth.getInstance()
         currentUser = auth.currentUser!!
-        currentUser?.let {
+        currentUser.let {
             val email = currentUser.email
             profileEmail.text = email
         }

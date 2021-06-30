@@ -6,7 +6,7 @@
         android:id="@+id/actionBack"
         android:icon="@drawable/ic_back"
         android:title="@string/back"
-        app:showAsAction="always" />
+        app:showAsAction="ifRoom" />
 
     <item
         android:id="@+id/actionDeleteAll"
@@ -16,6 +16,37 @@
     <item
         android:id="@+id/actionProfileInfo"
         android:title="@string/profile_info"
+        app:showAsAction="never" />
+
+    <item
+        android:id="@+id/actionSortBy"
+        android:title="@string/sort_by"
+        app:showAsAction="never" >
+
+        <menu>
+
+            <item
+                android:id="@+id/actionSortByLastname"
+                android:title="@string/sort_by_lastname"
+                app:showAsAction="never" />
+
+            <item
+                android:id="@+id/actionSortByName"
+                android:title="@string/sort_by_name"
+                app:showAsAction="never" />
+
+            <item
+                android:id="@+id/actionSortBySurname"
+                android:title="@string/sort_by_surname"
+                app:showAsAction="never" />
+
+        </menu>
+
+    </item>
+
+    <item
+        android:id="@+id/actionClearSort"
+        android:title="@string/sort_clear"
         app:showAsAction="never" />
 
 </menu>

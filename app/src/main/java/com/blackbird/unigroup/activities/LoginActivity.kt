@@ -18,7 +18,7 @@ import kotlinx.android.synthetic.main.activity_login.*
 
 class LoginActivity : AppCompatActivity() {
 
-    lateinit var auth: FirebaseAuth
+    private lateinit var auth: FirebaseAuth
     private lateinit var email: String
     private lateinit var password: String
     private lateinit var name: String
@@ -56,7 +56,7 @@ class LoginActivity : AppCompatActivity() {
         super.onStart()
         val currentUser = auth.currentUser
         if(currentUser != null) {
-            val intent = Intent(this, MainActivity::class.java).also {
+            Intent(this, MainActivity::class.java).also {
                 startActivity(it)
             }
         }
@@ -70,7 +70,7 @@ class LoginActivity : AppCompatActivity() {
                     if (task.isSuccessful) {
                         val user = auth.currentUser
                         Toast.makeText(this, "Authentication successful.", Toast.LENGTH_SHORT).show()
-                        val intent = Intent(this, MainActivity::class.java).also {
+                        Intent(this, MainActivity::class.java).also {
                             startActivity(it)
                         }
                         writeNewUser(user!!.uid, name, email)
@@ -88,9 +88,9 @@ class LoginActivity : AppCompatActivity() {
     private fun signIn() {
         auth.signInWithEmailAndPassword(email, password).addOnCompleteListener(this) { task ->
             if (task.isSuccessful) {
-                val user = auth.currentUser
+                auth.currentUser
                 Toast.makeText(this, "Authentication successful.", Toast.LENGTH_SHORT).show()
-                val intent = Intent(this, MainActivity::class.java).also {
+                Intent(this, MainActivity::class.java).also {
                     startActivity(it)
                 }
                 finish()

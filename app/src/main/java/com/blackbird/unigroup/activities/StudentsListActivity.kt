@@ -21,8 +21,9 @@ import kotlinx.android.synthetic.main.activity_students_list.*
 class StudentsListActivity : AppCompatActivity() {
 
     private lateinit var dbReference: DatabaseReference
-    lateinit var auth: FirebaseAuth
+    private lateinit var auth: FirebaseAuth
     private var studentsList = mutableListOf<Student>()
+    private val adapter = StudentsAdapter(studentsList)
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -32,7 +33,6 @@ class StudentsListActivity : AppCompatActivity() {
         dbReference = FirebaseDatabase.getInstance().reference.child("users/${auth.uid}/group")
 
         rvStudents.layoutManager = LinearLayoutManager(this)
-        val adapter = StudentsAdapter(studentsList)
         rvStudents.adapter = adapter
 
         val profileListener = object : ValueEventListener {
@@ -57,7 +57,7 @@ class StudentsListActivity : AppCompatActivity() {
             override fun onItemClick(view: View?, position: Int) {
                 for(i in 0 until studentsList.size) {
                     if(position == i) {
-                        val intent = Intent(this@StudentsListActivity, StudentActivity::class.java).also {
+                        Intent(this@StudentsListActivity, StudentActivity::class.java).also {
                             it.putExtra("EXTRA_ID", studentsList[i].listId)
                             startActivity(it)
                         }
@@ -75,7 +75,7 @@ class StudentsListActivity : AppCompatActivity() {
         }))
 
         btnAddStudent.setOnClickListener {
-            val intent = Intent(this, AddStudentActivity::class.java).also {
+            Intent(this, AddStudentActivity::class.java).also {
                 startActivity(it)
             }
         }
@@ -98,9 +98,29 @@ class StudentsListActivity : AppCompatActivity() {
                 true
             }
             R.id.actionProfileInfo -> {
-                val intent = Intent(this, ProfileActivity::class.java).also {
+                Intent(this, ProfileActivity::class.java).also {
                     startActivity(it)
                 }
+                true
+            }
+            R.id.actionSortByLastname -> {
+                studentsList.sortBy { it.lastname }
+                adapter.notifyDataSetChanged()
+                true
+            }
+            R.id.actionSortByName -> {
+                studentsList.sortBy { it.name }
+                adapter.notifyDataSetChanged()
+                true
+            }
+            R.id.actionSortBySurname -> {
+                studentsList.sortBy { it.surname }
+                adapter.notifyDataSetChanged()
+                true
+            }
+            R.id.actionClearSort -> {
+                studentsList.sortBy { it.listId }
+                adapter.notifyDataSetChanged()
                 true
             }
             else -> super.onOptionsItemSelected(item)

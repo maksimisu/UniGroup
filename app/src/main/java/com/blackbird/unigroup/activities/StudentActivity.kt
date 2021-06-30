@@ -1,19 +1,23 @@
 package com.blackbird.unigroup.activities
 
+import android.Manifest
 import android.content.Intent
+import android.content.pm.PackageManager
 import android.net.Uri
 import android.os.Bundle
-import android.telephony.SmsManager
 import android.util.Log
 import android.view.Menu
 import android.view.MenuInflater
 import android.view.MenuItem
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.app.ActivityCompat
+import androidx.core.content.ContextCompat
 import com.blackbird.unigroup.R
 import com.blackbird.unigroup.data.Student
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.*
 import kotlinx.android.synthetic.main.activity_student.*
+import java.security.Permission
 
 class StudentActivity : AppCompatActivity() {
 
@@ -71,7 +75,7 @@ class StudentActivity : AppCompatActivity() {
         }
 
         btnSendSMS.setOnClickListener {
-            val intent = Intent(Intent.ACTION_VIEW).also {
+            Intent(Intent.ACTION_VIEW).also {
                 it.data = Uri.parse("smsto:")
                 it.putExtra("address", student.phoneNumber)
                 it.type = "vnd.android-dir/mms-sms"
@@ -80,7 +84,7 @@ class StudentActivity : AppCompatActivity() {
         }
 
         btnEditStudent.setOnClickListener {
-            val intent = Intent(this, EditStudentActivity::class.java).also {
+            Intent(this, EditStudentActivity::class.java).also {
                 it.putExtra("EXTRA_ID", extraListId)
                 startActivity(it)
             }
