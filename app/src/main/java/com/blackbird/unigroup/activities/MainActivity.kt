@@ -16,7 +16,6 @@ import com.blackbird.unigroup.databinding.ActivityMainBinding
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.database.*
-import kotlinx.android.synthetic.main.activity_main.*
 import kotlin.system.exitProcess
 
 class MainActivity : AppCompatActivity() {

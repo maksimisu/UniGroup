@@ -1,8 +1,6 @@
 package com.blackbird.unigroup.activities
 
-import android.Manifest
 import android.content.Intent
-import android.content.pm.PackageManager
 import android.net.Uri
 import android.os.Bundle
 import android.util.Log
@@ -10,14 +8,11 @@ import android.view.Menu
 import android.view.MenuInflater
 import android.view.MenuItem
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.app.ActivityCompat
-import androidx.core.content.ContextCompat
 import com.blackbird.unigroup.R
 import com.blackbird.unigroup.data.Student
+import com.blackbird.unigroup.databinding.ActivityStudentBinding
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.*
-import kotlinx.android.synthetic.main.activity_student.*
-import java.security.Permission
 
 class StudentActivity : AppCompatActivity() {
 
@@ -25,10 +20,12 @@ class StudentActivity : AppCompatActivity() {
     lateinit var auth: FirebaseAuth
     lateinit var email: String
     lateinit var student: Student
+    lateinit var binding: ActivityStudentBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_student)
+        binding = ActivityStudentBinding.inflate(layoutInflater)
+        setContentView(binding.root)
 
         auth = FirebaseAuth.getInstance()
         dbReference = FirebaseDatabase.getInstance().reference
@@ -40,13 +37,13 @@ class StudentActivity : AppCompatActivity() {
             override fun onDataChange(dataSnapshot: DataSnapshot) {
                 val studentData = dataSnapshot.child("users/${auth.uid}/group/id_student_${auth.uid}_$extraListId").getValue(
                     Student::class.java)
-                tvStudentLastname.text = studentData?.lastname
-                tvStudentName.text = studentData?.name
-                tvStudentSurname.text = studentData?.surname
-                tvStudentListId.text = studentData?.listId.toString()
-                tvStudentEmail.text = studentData?.email
-                tvStudentPhone.text = studentData?.phoneNumber
-                tvStudentBirthday.text = studentData?.birthday
+                binding.tvStudentLastname.text = studentData?.lastname
+                binding.tvStudentName.text = studentData?.name
+                binding.tvStudentSurname.text = studentData?.surname
+                binding.tvStudentListId.text = studentData?.listId.toString()
+                binding.tvStudentEmail.text = studentData?.email
+                binding.tvStudentPhone.text = studentData?.phoneNumber
+                binding.tvStudentBirthday.text = studentData?.birthday
                 email = studentData?.email.toString()
                 student = Student(
                         studentData?.lastname.toString(),
@@ -65,16 +62,16 @@ class StudentActivity : AppCompatActivity() {
         }
         dbReference.addValueEventListener(profileListener)
 
-        btnDeleteStudent.setOnClickListener {
+        binding.btnDeleteStudent.setOnClickListener {
             dbReference.child("users/${auth.uid}/group/id_student_${auth.uid}_$extraListId").removeValue()
             finish()
         }
 
-        btnSendEmail.setOnClickListener {
+        binding.btnSendEmail.setOnClickListener {
             composeEmail(email)
         }
 
-        btnSendSMS.setOnClickListener {
+        binding.btnSendSMS.setOnClickListener {
             Intent(Intent.ACTION_VIEW).also {
                 it.data = Uri.parse("smsto:")
                 it.putExtra("address", student.phoneNumber)
@@ -83,15 +80,15 @@ class StudentActivity : AppCompatActivity() {
             }
         }
 
-        btnEditStudent.setOnClickListener {
+        binding.btnEditStudent.setOnClickListener {
             Intent(this, EditStudentActivity::class.java).also {
                 it.putExtra("EXTRA_ID", extraListId)
                 startActivity(it)
             }
         }
 
-        btnMigrateStudent.setOnClickListener {
-            val newId = etNewStudentId.text.toString().toInt()
+        binding.btnMigrateStudent.setOnClickListener {
+            val newId = binding.etNewStudentId.text.toString().toInt()
             student.listId = newId
             dbReference.child("users/${auth.uid}/group/id_student_${auth.uid}_${newId}").setValue(student)
             dbReference.child("users/${auth.uid}/group/id_student_${auth.uid}_$extraListId").removeValue()

@@ -9,24 +9,27 @@ import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import com.blackbird.unigroup.R
+import com.blackbird.unigroup.databinding.ActivityProfileBinding
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.database.*
-import kotlinx.android.synthetic.main.activity_profile.*
 
 class ProfileActivity : AppCompatActivity() {
 
     private lateinit var auth: FirebaseAuth
     private lateinit var currentUser: FirebaseUser
     private lateinit var dbReference: DatabaseReference
+    private lateinit var binding: ActivityProfileBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_profile)
+
+        binding = ActivityProfileBinding.inflate(layoutInflater)
+        setContentView(binding.root)
 
         dbReference = FirebaseDatabase.getInstance().reference
 
-        val profileEmail = tvProfileEmail
+        val profileEmail = binding.tvProfileEmail
         auth = FirebaseAuth.getInstance()
         currentUser = auth.currentUser!!
         currentUser.let {
@@ -34,7 +37,7 @@ class ProfileActivity : AppCompatActivity() {
             profileEmail.text = email
         }
 
-        val profileName = tvProfileName
+        val profileName = binding.tvProfileName
         val profileListener = object : ValueEventListener {
             override fun onDataChange(dataSnapshot: DataSnapshot) {
                 val name = dataSnapshot.child("users/${currentUser.uid}/username").value.toString()
@@ -47,7 +50,7 @@ class ProfileActivity : AppCompatActivity() {
         }
         dbReference.addValueEventListener(profileListener)
 
-        btnChangeProfileName.setOnClickListener {
+        binding.btnChangeProfileName.setOnClickListener {
             changeName()
         }
     }
@@ -97,7 +100,7 @@ class ProfileActivity : AppCompatActivity() {
     }
 
     private fun changeName() {
-        val newName = etProfileName.text.toString()
+        val newName = binding.etProfileName.text.toString()
         dbReference.child("users/${auth.uid}/username").setValue(newName)
     }
 }

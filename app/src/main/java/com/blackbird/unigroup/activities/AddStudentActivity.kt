@@ -11,7 +11,6 @@ import com.blackbird.unigroup.databinding.ActivityAddStudentBinding
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.FirebaseDatabase
-import kotlinx.android.synthetic.main.activity_add_student.*
 
 class AddStudentActivity : AppCompatActivity() {
 
@@ -46,7 +45,7 @@ class AddStudentActivity : AppCompatActivity() {
         dbReference.child("users")
             .child(auth.uid!!)
             .child("group")
-            .child("id_student_${auth.uid}_${etStudentListId.text}")
+            .child("id_student_${auth.uid}_${binding.etStudentListId.text}")
             .setValue(student)
     }
 

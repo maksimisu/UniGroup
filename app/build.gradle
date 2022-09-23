@@ -2,17 +2,16 @@ plugins {
     id 'com.android.application'
     id 'kotlin-android'
     id 'com.google.gms.google-services'
-    id 'kotlin-android-extensions'
     id 'kotlin-kapt'
 }
 
 android {
-    compileSdkVersion 32
+    compileSdkVersion 33
 
     defaultConfig {
         applicationId "com.blackbird.unigroup"
         minSdkVersion 24
-        targetSdkVersion 32
+        targetSdkVersion 33
         versionCode 1
         versionName "1.0.$versionCode"
 

@@ -15,7 +15,6 @@ import com.blackbird.unigroup.databinding.ActivityLoginBinding
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.FirebaseDatabase
-import kotlinx.android.synthetic.main.activity_login.*
 
 class LoginActivity : AppCompatActivity() {
 
@@ -131,9 +130,9 @@ class LoginActivity : AppCompatActivity() {
         password == repeat
 
     private fun showError() {
-        ivLoginError.visibility = View.VISIBLE
-        tvLoginHelp.visibility = View.VISIBLE
-        tvLoginHelp.text = R.string.password_incorrect_repeat.toString()
+        binding.ivLoginError.visibility = View.VISIBLE
+        binding.tvLoginHelp.visibility = View.VISIBLE
+        binding.tvLoginHelp.text = R.string.password_incorrect_repeat.toString()
     }
 
 }

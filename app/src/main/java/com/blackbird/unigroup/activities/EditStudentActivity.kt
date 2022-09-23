@@ -11,7 +11,6 @@ import com.blackbird.unigroup.data.Student
 import com.blackbird.unigroup.databinding.ActivityEditStudentBinding
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.*
-import kotlinx.android.synthetic.main.activity_edit_student.*
 
 class EditStudentActivity : AppCompatActivity() {
 

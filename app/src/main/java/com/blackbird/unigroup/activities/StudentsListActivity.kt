@@ -14,9 +14,9 @@ import com.blackbird.unigroup.R
 import com.blackbird.unigroup.data.RVClick
 import com.blackbird.unigroup.data.Student
 import com.blackbird.unigroup.data.StudentsAdapter
+import com.blackbird.unigroup.databinding.ActivityStudentsListBinding
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.*
-import kotlinx.android.synthetic.main.activity_students_list.*
 
 class StudentsListActivity : AppCompatActivity() {
 
@@ -24,16 +24,18 @@ class StudentsListActivity : AppCompatActivity() {
     private lateinit var auth: FirebaseAuth
     private var studentsList = mutableListOf<Student>()
     private val adapter = StudentsAdapter(studentsList)
+    private lateinit var binding: ActivityStudentsListBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_students_list)
+        binding = ActivityStudentsListBinding.inflate(layoutInflater)
+        setContentView(binding.root)
 
         auth = FirebaseAuth.getInstance()
         dbReference = FirebaseDatabase.getInstance().reference.child("users/${auth.uid}/group")
 
-        rvStudents.layoutManager = LinearLayoutManager(this)
-        rvStudents.adapter = adapter
+        binding.rvStudents.layoutManager = LinearLayoutManager(this)
+        binding.rvStudents.adapter = adapter
 
         val profileListener = object : ValueEventListener {
             override fun onDataChange(dataSnapshot: DataSnapshot) {
@@ -52,7 +54,7 @@ class StudentsListActivity : AppCompatActivity() {
         }
         dbReference.addValueEventListener(profileListener)
 
-        val recyclerView = rvStudents
+        val recyclerView = binding.rvStudents
         recyclerView.addOnItemTouchListener(RVClick(this, recyclerView, object : RVClick.OnItemClickListener {
             override fun onItemClick(view: View?, position: Int) {
                 for(i in 0 until studentsList.size) {
@@ -74,7 +76,7 @@ class StudentsListActivity : AppCompatActivity() {
             }
         }))
 
-        btnAddStudent.setOnClickListener {
+        binding.fabAddStudent.setOnClickListener {
             Intent(this, AddStudentActivity::class.java).also {
                 startActivity(it)
             }
