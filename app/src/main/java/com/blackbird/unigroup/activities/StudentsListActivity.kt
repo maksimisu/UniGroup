@@ -68,7 +68,7 @@ class StudentsListActivity : AppCompatActivity() {
             override fun onLongItemClick(view: View?, position: Int) {
                 for(i in 0 until studentsList.size) {
                     if(position == i) {
-                        Toast.makeText(this@StudentsListActivity, "Student ${studentsList[i].name} chosen", Toast.LENGTH_SHORT).show()
+                        Toast.makeText(this@StudentsListActivity,"Student ${studentsList[i].name} chosen", Toast.LENGTH_SHORT).show()
                     }
                 }
             }

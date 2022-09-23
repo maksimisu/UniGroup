@@ -11,6 +11,7 @@ import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import com.blackbird.unigroup.R
 import com.blackbird.unigroup.data.User
+import com.blackbird.unigroup.databinding.ActivityLoginBinding
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.FirebaseDatabase
@@ -19,36 +20,29 @@ import kotlinx.android.synthetic.main.activity_login.*
 class LoginActivity : AppCompatActivity() {
 
     private lateinit var auth: FirebaseAuth
-    private lateinit var email: String
-    private lateinit var password: String
-    private lateinit var name: String
     private lateinit var dbReference: DatabaseReference
+    private lateinit var binding: ActivityLoginBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_login)
+
+        binding = ActivityLoginBinding.inflate(layoutInflater)
+        setContentView(binding.root)
 
         dbReference = FirebaseDatabase.getInstance().reference
         auth = FirebaseAuth.getInstance()
 
-        btnRegister.setOnClickListener {
-            if(loginPassword.text.toString() == loginPasswordConfirm.text.toString()) {
-                email = loginEmail.text.toString()
-                password = loginPassword.text.toString()
-                name = loginName.text.toString()
-                createAccount()
+        binding.btnRegister.setOnClickListener {
+            if(checkPasswordRepeat(binding.loginPassword.text.toString(), binding.loginPasswordConfirm.text.toString())) {
+                val user = User(binding.loginName.text.toString(), binding.loginEmail.text.toString(), binding.loginPassword.text.toString())
+                signUp(user)
             } else {
-                ivLoginError.visibility = View.VISIBLE
-                tvLoginHelp.visibility = View.VISIBLE
-                tvLoginHelp.text = "Your password repeat is not correct"
+                showError()
             }
         }
 
-        btnLogIn.setOnClickListener {
-            email = loginEmail.text.toString()
-            password = loginPassword.text.toString()
-
-            signIn()
+        binding.btnLogIn.setOnClickListener {
+            signIn(User(null, binding.loginEmail.text.toString(), binding.loginPassword.text.toString()))
         }
     }
 
@@ -59,11 +53,29 @@ class LoginActivity : AppCompatActivity() {
             Intent(this, MainActivity::class.java).also {
                 startActivity(it)
             }
+            finish()
         }
     }
 
-    private fun createAccount() {
-        auth.createUserWithEmailAndPassword(email, password).addOnCompleteListener(this) { task ->
+    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+        val inflater: MenuInflater = menuInflater
+        inflater.inflate(R.menu.menu_login, menu)
+        return true
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        when(item.itemId) {
+            R.id.actionTip -> showTip()
+            R.id.actionBack -> onBackPressed()
+        }
+        return true
+    }
+
+    private fun signUp(user: User) {
+        val username = user.username
+        val email = user.email
+        val password = user.password
+        auth.createUserWithEmailAndPassword(email!!, password!!).addOnCompleteListener(this) { task ->
             if (task.isSuccessful) {
                 Toast.makeText(this, "Account created successfully.", Toast.LENGTH_SHORT).show()
                 auth.signInWithEmailAndPassword(email, password).addOnCompleteListener(this) { task ->
@@ -73,7 +85,7 @@ class LoginActivity : AppCompatActivity() {
                         Intent(this, MainActivity::class.java).also {
                             startActivity(it)
                         }
-                        writeNewUser(user!!.uid, name, email)
+                        writeNewUser(user!!.uid, username!!, email)
                         finish()
                     } else {
                         Toast.makeText(baseContext, "Authentication failed.", Toast.LENGTH_SHORT).show()
@@ -85,8 +97,10 @@ class LoginActivity : AppCompatActivity() {
         }
     }
 
-    private fun signIn() {
-        auth.signInWithEmailAndPassword(email, password).addOnCompleteListener(this) { task ->
+    private fun signIn(user: User) {
+        val email = user.email
+        val password = user.password
+        auth.signInWithEmailAndPassword(email!!, password!!).addOnCompleteListener(this) { task ->
             if (task.isSuccessful) {
                 auth.currentUser
                 Toast.makeText(this, "Authentication successful.", Toast.LENGTH_SHORT).show()
@@ -105,26 +119,21 @@ class LoginActivity : AppCompatActivity() {
         dbReference.child("users").child(userId).setValue(user)
     }
 
-    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
-        val inflater: MenuInflater = menuInflater
-        inflater.inflate(R.menu.menu_login, menu)
-        return true
+    private fun showTip() {
+        AlertDialog.Builder(this)
+            .setMessage(R.string.tip)
+            .setPositiveButton("Ok") { _, _ -> }
+            .create()
+            .show()
     }
 
-    override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        return when(item.itemId) {
-            R.id.actionTip -> {
-                val builder = AlertDialog.Builder(this)
-                builder.setMessage(R.string.tip)
-                        .setPositiveButton("Ok") { _, _ -> }
-                builder.create().show()
-                true
-            }
-            R.id.actionBack -> {
-                onBackPressed()
-                true
-            }
-            else -> super.onOptionsItemSelected(item)
-        }
+    private fun checkPasswordRepeat(password: String, repeat: String) : Boolean =
+        password == repeat
+
+    private fun showError() {
+        ivLoginError.visibility = View.VISIBLE
+        tvLoginHelp.visibility = View.VISIBLE
+        tvLoginHelp.text = R.string.password_incorrect_repeat.toString()
     }
+
 }

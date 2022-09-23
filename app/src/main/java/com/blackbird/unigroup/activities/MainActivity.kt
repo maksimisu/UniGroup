@@ -12,6 +12,7 @@ import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import com.blackbird.unigroup.R
 import com.blackbird.unigroup.data.Student
+import com.blackbird.unigroup.databinding.ActivityMainBinding
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.database.*
@@ -25,10 +26,14 @@ class MainActivity : AppCompatActivity() {
     private lateinit var dbReference: DatabaseReference
     private var studentsList = mutableListOf<Student>()
     private var emailsList = ""
+    private lateinit var binding: ActivityMainBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
+
+        binding = ActivityMainBinding.inflate(layoutInflater)
+        setContentView(binding.root)
+
         auth = FirebaseAuth.getInstance()
         currentUser = auth.currentUser!!
         dbReference = FirebaseDatabase.getInstance().reference.child("users/${auth.uid}/group")
@@ -49,13 +54,13 @@ class MainActivity : AppCompatActivity() {
         }
         dbReference.addValueEventListener(profileListener)
 
-        btnGroupList.setOnClickListener {
+        binding.btnGroupList.setOnClickListener {
             Intent(this, StudentsListActivity::class.java).also {
                 startActivity(it)
             }
         }
 
-        btnSendEmailAll.setOnClickListener {
+        binding.btnSendEmailAll.setOnClickListener {
             sendEmailAll()
         }
     }

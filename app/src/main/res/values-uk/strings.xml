@@ -47,9 +47,10 @@
     <string name="btn_student_migrate">Мігрувати</string>
     <string name="btn_send_all">Відправити е-лист всім</string>
     <string name="tv_copyrights">© maksimisu</string>
-    <string name="sort_by">Відсортувати за...</string>
+    <string name="sort_by">Відсортувати за…</string>
     <string name="sort_by_lastname">прізвищем</string>
     <string name="sort_by_name">ім\'ям</string>
     <string name="sort_by_surname">побатькові</string>
     <string name="sort_clear">Очистити сортування</string>
+    <string name="password_incorrect_repeat">Невірно введене підтвердження паролю!</string>
 </resources>

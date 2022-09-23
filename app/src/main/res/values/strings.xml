@@ -6,6 +6,9 @@
     <string name="cancel">Cancel</string>
     <string name="apply_changes">Apply</string>
 
+    <!-- Errors & Warnings -->
+    <string name="password_incorrect_repeat">Your password repeat is not correct!</string>
+
     <!-- Login -->
     <string name="name_hint">Enter name</string>
     <string name="email_hint">Enter email</string>

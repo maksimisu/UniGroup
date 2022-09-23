@@ -20,32 +20,4 @@ class Student() {
         this.birthday = birthday
     }
 
-    fun sortByLastname(students: List<Student>) {
-        students.sortedBy { it.lastname }
-    }
-
-    fun sortByName(students: List<Student>) {
-        students.sortedBy { it.name }
-    }
-
-    fun sortBySurname(students: List<Student>) {
-        students.sortedBy { it.surname }
-    }
-
-    fun sortByListId(students: List<Student>) {
-        students.sortedBy { it.listId }
-    }
-
-    fun sortByEmail(students: List<Student>) {
-        students.sortedBy { it.email }
-    }
-
-    fun sortByPhoneNumber(students: List<Student>) {
-        students.sortedBy { it.phoneNumber }
-    }
-
-    fun sortByBirthday(students: List<Student>) {
-        students.sortedBy { it.birthday }
-    }
-
 }
